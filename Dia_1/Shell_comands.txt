@@ -1,0 +1,62 @@
+# Command Line Tools basics
+
+# prompt: [dsc@vm:~] [base] % 
+# username: dsc | machine_name: vm | name current directory: ~ | current working directory under the home directory (~): [base]
+
+# Command: clear
+# clear screen
+[dsc@vm:~] [base] % clear
+
+# Command: echo [option(s)] [string(s)]
+# display line of text/string that are passed as an argument
+# $USER | $TERM | $SHELL | $PWD | $HOST ... environment variables
+[dsc@vm:~] [base] % echo $USER
+dsc
+[dsc@vm:~] [base] % echo "Mi usuario es $USER"
+Mi usuario es dsc
+[dsc@vm:~] [base] % echo "Hoy es el dia $(date)"
+Hoy es el dia lun sep 21 21:18:16 CEST 2020
+[dsc@vm:~] [base] % echo "hoy es el dia `date`"
+hoy es el dia lun sep 21 21:26:10 CEST 2020
+
+# Command: whoami
+# print userid
+[dsc@vm:~] [base] % whoami
+dsc
+
+# Command: pwd
+# print current directory
+[dsc@vm:~] [base] % pwd
+/home/dsc
+
+
+# Command: chmod
+# modifies file permissions
+# ugo = user/group/others (a=all)
+# rwx = read/write/execute
+#x-----x-----x---------------------------x
+#| rwx |  7  | read , write , execute    |
+#| rw- |  6  | read , write ,            |
+#| r-x |  5  | read ,       , execute    |
+#| r-- |  4  | read ,       ,            |
+#| -wx |  3  |      , write , execute    |
+#| -w- |  2  |      , write ,            |
+#| --x |  1  |      ,       , execute    |
+#| --- |  0  | zero permissions          |
+#x-----x-----x---------------------------x
+#x------------------------x-----------x
+#|chmod u=rwx,g=rwx,o=rx  | chmod 775 | 
+#|chmod u=rwx,g=rx,o=     | chmod 760 |
+#|chmod u=rw,g=r,o=r      | chmod 644 |
+#|chmod u=rw,g=r,o=       | chmod 640 |
+#|chmod u=rw,go=          | chmod 600 |
+#|chmod u=rwx,go=         | chmod 700 |
+#x------------------------x-----------x
+[dsc@vm:~] [base] % ls -l
+-rw-rw-r--  1 dsc dsc    0 sep 19 10:49 text_file.txt
+drwxr-xr-x  2 dsc dsc 4,0K mar 28  2019 Videos/
+[dsc@vm:~] [base] % chmod 644 Videos 
+drw-r--r--  2 dsc dsc 4,0K mar 28  2019 Videos/
+[dsc@vm:~] [base] % chmod u=rwx,g=rwx,o=rx Videos 
+drwxrwxr-x  2 dsc dsc 4,0K mar 28  2019 Videos/
+
